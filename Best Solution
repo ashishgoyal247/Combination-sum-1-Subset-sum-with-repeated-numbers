@@ -1,0 +1,30 @@
+void getSumList(vector<int> arr, vector<vector<int>> &result, vector<int> &currentList, int targetLeft,int start)
+    {
+        if(targetLeft < 0)
+        return;
+        
+        if(targetLeft == 0)
+        {
+            result.push_back(currentList);
+            return;
+        }
+        
+        for(int i = start; i < arr.size(); i++)
+        {
+            currentList.push_back(arr[i]);
+            getSumList(arr, result, currentList, targetLeft - arr[i], i);
+            currentList.pop_back();
+        }
+        
+        return;
+    }
+
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target)
+    {
+        vector<vector<int>> result;
+        vector<int> currentList;
+        
+        getSumList(candidates, result, currentList, target, 0);
+        
+        return result;
+    }
